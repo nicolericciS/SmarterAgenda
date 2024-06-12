@@ -15,3 +15,11 @@ fun Date.convertToString(): String {
         Locale.getDefault()
     ).format(this)
 }
+
+fun String.formatAsPhoneNumber(): String {
+    return if (length == 11) {
+        "(${substring(0, 2)}) ${substring(2, 7)}-${substring(7, 11)}"
+    } else {
+        this
+    }
+}

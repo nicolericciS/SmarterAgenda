@@ -10,6 +10,7 @@ import br.com.nicole.smarteragenda.ContactForm
 import br.com.nicole.smarteragenda.Navigation.contactDetailsGraph
 import br.com.nicole.smarteragenda.Navigation.contactFormGraph
 import br.com.nicole.smarteragenda.Navigation.homeGraph
+import br.com.nicole.smarteragenda.Navigation.loginGraph
 import br.com.nicole.smarteragenda.SmarterAgendaDestinations
 
 @Composable
@@ -19,9 +20,10 @@ fun SmarterAgendaNavHost(
 ) {
     NavHost(
         navController = navController,
-        startDestination = SmarterAgendaDestinations.HomeGraph.route,
+        startDestination = SmarterAgendaDestinations.LoginGraph.route,
         modifier = modifier
     ) {
+        loginGraph(navController)
         homeGraph(navController)
         contactFormGraph(navController)
         contactDetailsGraph(navController)

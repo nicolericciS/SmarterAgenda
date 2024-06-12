@@ -1,6 +1,7 @@
 package br.com.nicole.smarteragenda.Ui.Form
 
 import android.widget.Toast
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -14,6 +15,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.DateRange
@@ -31,11 +33,13 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusDirection
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
@@ -78,6 +82,7 @@ fun ContactFormScreen(
             modifier
                 .padding(paddingValues)
                 .fillMaxSize()
+                .verticalScroll(ScrollState(0))
         ) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
@@ -179,7 +184,7 @@ fun ContactFormScreen(
                                     }
                                 )
                             }
-                        }
+                        },
                     )
                 }
 
@@ -266,7 +271,7 @@ fun ContactFormScreen(
                             }
                             else -> onClickSalvar()
                         }
-                    }
+                    },
                 ) {
                     Text(text = stringResource(R.string.salvar))
                 }
@@ -300,7 +305,12 @@ fun ContactFormScreen(
     @Composable
     fun ContactFormAppBar(tituloApprBar: String) {
         TopAppBar(
-            title = { Text(text = tituloApprBar) },
+            title = { Text(text = tituloApprBar, color = Color.White) },
+            colors = TopAppBarDefaults.smallTopAppBarColors(
+                containerColor = MaterialTheme.colorScheme.primary,
+                titleContentColor = Color.White,
+                actionIconContentColor = Color.White
+            )
         )
     }
 

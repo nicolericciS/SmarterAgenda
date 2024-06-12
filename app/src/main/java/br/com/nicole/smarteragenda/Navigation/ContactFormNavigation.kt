@@ -40,26 +40,12 @@ fun NavGraphBuilder.contactFormGraph(
                 )
             }
 
-            val contactDao = SmarterAgendaDatabase.getDatabase(context).contactDao()
-
             val coroutineScope = rememberCoroutineScope()
             ContactFormScreen(
                 state = state,
                 onClickSalvar = {
-                    with(state) {
-                        coroutineScope.launch {
-                            contactDao.insert(
-                                Contact(
-                                    name = name,
-                                    phones = phones,
-                                    profilePic = profilePic,
-                                    cpf = cpf,
-                                    uf = uf,
-                                    dataHoraCadastro = LocalDateTime.now(),
-                                    birthday = birthday
-                                )
-                            )
-                        }
+                    coroutineScope.launch {
+                        viewModel.save()
                     }
                     navController.popBackStack()
                 },

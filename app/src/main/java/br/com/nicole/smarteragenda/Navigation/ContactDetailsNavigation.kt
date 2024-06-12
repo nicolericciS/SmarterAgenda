@@ -40,6 +40,7 @@ fun NavGraphBuilder.contactDetailsGraph(
                 onClickBack = { navController.popBackStack() },
                 onRemoveContact = {
                     scope.launch {
+                        viewModel.removeContact()
                         context.showMessage(context.getString(R.string.contato_apagado))
                     }
                     navController.popBackStack()

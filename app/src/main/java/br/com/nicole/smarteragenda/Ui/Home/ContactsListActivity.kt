@@ -20,14 +20,6 @@ class ContactsListActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val contactDao = SmarterAgendaDatabase.getDatabase(this).contactDao()
-
-
-        CoroutineScope(IO).launch {
-            val contacts = contactDao.searchAll()
-            Log.i("onCreate", "onCreate: $contacts")
-        }
-
         setContent {
             SmarterAgendaTheme {
                 val navController = rememberNavController()

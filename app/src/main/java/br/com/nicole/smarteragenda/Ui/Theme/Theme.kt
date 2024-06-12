@@ -14,18 +14,17 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
-import br.com.nicole.smarteragenda.SmarterAgenda
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Blue200,
-    secondary = Blue500,
-    tertiary = YellowA200
+    primary = Green200,
+    secondary = Green500,
+    tertiary = OrangeA200
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = Blue700,
-    secondary = Blue500,
-    tertiary = YellowA200
+    primary = Green700,
+    secondary = Green500,
+    tertiary = OrangeA200
 
     /* Other default colors to override
     background = Color(0xFFFFFBFE),

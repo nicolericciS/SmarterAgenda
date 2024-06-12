@@ -1,7 +1,6 @@
-@file:OptIn(ExperimentalMaterial3Api::class)
-
 package br.com.nicole.smarteragenda.Ui.Details
 
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -10,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Delete
@@ -24,6 +24,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarColors
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -33,9 +35,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import br.com.nicole.smarteragenda.Extensions.convertToString
+import br.com.nicole.smarteragenda.Extensions.formatAsPhoneNumber
 import br.com.nicole.smarteragenda.R
 import br.com.nicole.smarteragenda.Theme.SmarterAgendaTheme
 import br.com.nicole.smarteragenda.Ui.Components.AsyncProfilePic
+
+
 
 @Composable
 fun ContactDetailsScreen(
@@ -53,11 +58,13 @@ fun ContactDetailsScreen(
                 onClickEdit = onClickEdit
             )
         },
-    ) { paddingValues ->
+
+        ) { paddingValues ->
         Column(
             modifier
                 .padding(paddingValues)
-                .fillMaxSize(),
+                .fillMaxSize()
+                .verticalScroll(ScrollState(0)),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
@@ -130,75 +137,91 @@ fun ContactDetailsScreen(
                     fontWeight = FontWeight.Bold,
                     style = MaterialTheme.typography.headlineSmall
                 )
-
                 Text(
-                    text = "${state.name}",
-                    style = MaterialTheme.typography.headlineSmall
+
+                    text = stringResource(R.string.nome_completo),
+                    fontWeight = FontWeight.Bold,
+                    style = MaterialTheme.typography.bodyLarge
                 )
+
                 Text(
                     modifier = Modifier.padding(bottom = 16.dp),
-                    text = stringResource(R.string.nome_completo),
-                    color = Color.Gray,
+                    text = "${state.name}",
+
                     style = MaterialTheme.typography.bodyMedium
                 )
 
-                Text(
-                    text = state.phone,
-                    style = MaterialTheme.typography.headlineSmall
-                )
-                Text(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(bottom = 16.dp),
-                    text = stringResource(id = R.string.telefone),
-                    color = Color.Gray,
-                    style = MaterialTheme.typography.bodyMedium
-                )
 
-                Text(
-                    text = state.cpf,
-                    style = MaterialTheme.typography.headlineSmall
-                )
-                Text(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(bottom = 16.dp),
-                    text = stringResource(id = R.string.cpf),
-                    color = Color.Gray,
-                    style = MaterialTheme.typography.bodyMedium
-                )
+                Column {
+                    state.phones.forEach { phone ->
+                        Text(
+                            text = stringResource(id = R.string.telefone),
+                            fontWeight = FontWeight.Bold,
+                            style = MaterialTheme.typography.bodyLarge
+                        )
+                        Text(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(bottom = 16.dp),
+                            text = phone.formatAsPhoneNumber(),
+                            style = MaterialTheme.typography.bodySmall
+                        )
 
-                Text(
-                    text = state.uf,
-                    style = MaterialTheme.typography.headlineSmall
-                )
-                Text(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(bottom = 16.dp),
-                    text = stringResource(id = R.string.uf),
-                    color = Color.Gray,
-                    style = MaterialTheme.typography.bodyMedium
-                )
+                    }
 
-                state.birthday?.let {
                     Text(
-                        text = it.convertToString(),
-                        style = MaterialTheme.typography.headlineSmall
+                        text = stringResource(id = R.string.cpf),
+                        fontWeight = FontWeight.Bold,
+                        style = MaterialTheme.typography.bodyLarge
                     )
+
                     Text(
-                        modifier = Modifier.fillMaxWidth(),
-                        text = stringResource(id = R.string.aniversario),
-                        color = Color.Gray,
-                        style = MaterialTheme.typography.bodyMedium
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(bottom = 16.dp),
+                        text = state.cpf,
+                        style = MaterialTheme.typography.bodySmall
                     )
+
+                    Text(
+                        text = stringResource(id = R.string.uf),
+                        fontWeight = FontWeight.Bold,
+                        style = MaterialTheme.typography.bodyLarge
+                    )
+
+                    Text(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(bottom = 16.dp),
+                        text = state.uf,
+                        style = MaterialTheme.typography.bodySmall
+                    )
+
+                    state.birthday?.let {
+                        Text(
+                            modifier = Modifier.fillMaxWidth(),
+                            text = stringResource(id = R.string.aniversario),
+                            fontWeight = FontWeight.Bold,
+                            style = MaterialTheme.typography.bodyLarge
+                        )
+
+                        Text(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(bottom = 16.dp),
+                            text = state.birthday.toString(),
+                            style = MaterialTheme.typography.bodySmall
+                        )
+                    }
+
                 }
-
             }
         }
     }
+
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ContactDetailsAppBar(
     onClickBack: () -> Unit,
@@ -206,7 +229,12 @@ fun ContactDetailsAppBar(
     onClickEdit: () -> Unit
 ) {
 
-    TopAppBar(title = { Text(text = stringResource(id = R.string.app_name)) },
+    TopAppBar(title = { Text(text = stringResource(id = R.string.app_name), color = Color.White) },
+        colors = TopAppBarDefaults.smallTopAppBarColors(
+            containerColor = MaterialTheme.colorScheme.primary,
+            titleContentColor = Color.White,
+            actionIconContentColor = Color.White
+        ),
         actions =
         {
             Row(
@@ -247,11 +275,9 @@ fun ContactDetailsAppBar(
     )
 
 }
-
-
 @Preview
 @Composable
-fun DetalhesContatoScreenPreview() {
+fun ContactDetailsScreenPreview() {
     SmarterAgendaTheme {
         ContactDetailsScreen(state = ContactDetailsUiState())
     }

@@ -13,13 +13,4 @@ import br.com.nicole.smarteragenda.Model.Contact
 abstract class SmarterAgendaDatabase : RoomDatabase() {
     abstract fun contactDao(): ContactDao
 
-    companion object {
-        fun getDatabase(context: Context): SmarterAgendaDatabase {
-            return Room.databaseBuilder(
-                context,
-                SmarterAgendaDatabase::class.java,
-                name = "smarterAgenda.db"
-            ).build()
-        }
-    }
 }

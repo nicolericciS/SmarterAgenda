@@ -2,7 +2,7 @@ package br.com.nicole.smarteragenda.Theme
 
 import androidx.compose.ui.graphics.Color
 
-val Blue200 = Color(0xFF90CAF9)
-val Blue500 = Color(0xFF2196F3)
-val Blue700 = Color(0xFF346BFE)
-val YellowA200 = Color(0xFFFFFF00)
+val Green200 = Color(0xFFD8DBD3)
+val Green500 = Color(0xFF95D2B3)
+val Green700 = Color(0xFF55AD9B)
+val OrangeA200 = Color(0xFFFFA62F)
