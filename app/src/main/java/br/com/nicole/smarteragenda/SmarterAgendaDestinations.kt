@@ -2,7 +2,7 @@ package br.com.nicole.smarteragenda
 
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
-import br.com.nicole.smarteragenda.Util.ID_CONTACT
+import br.com.nicole.smarteragenda.util.ID_CONTACT
 
 sealed class SmarterAgendaDestinations(val route: String) {
     object LoginGraph : SmarterAgendaDestinations("graph_login")

@@ -2,8 +2,8 @@ package br.com.nicole.smarteragenda.di.Module
 
 import android.content.Context
 import androidx.room.Room
-import br.com.nicole.smarteragenda.Database.ContactDao
-import br.com.nicole.smarteragenda.Database.SmarterAgendaDatabase
+import br.com.nicole.smarteragenda.database.ContactDao
+import br.com.nicole.smarteragenda.database.SmarterAgendaDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
