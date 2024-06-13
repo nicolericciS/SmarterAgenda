@@ -1,7 +1,6 @@
 # Smarter Agenda
 
-![image](https://github.com/nicolericciS/SmarterAgenda/assets/121962590/abcf1b02-adab-430e-91d6-cc57ed1db2a3)
-
+<img src="https://github.com/nicolericciS/SmarterAgenda/assets/121962590/abcf1b02-adab-430e-91d6-cc57ed1db2a3" alt="Logo" width="200"/>
 
 ## 📜 Índice
 
